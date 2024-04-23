@@ -24,4 +24,5 @@ MOVE_VEL = 20 #Velocity the squares will move with -> 20 pixels per second
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Py2048")
 
+#this is a test for the warp test
 
