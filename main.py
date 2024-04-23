@@ -17,8 +17,11 @@ OUTLINE_THICKNESS = 10
 BACKGROUND_COLOR = (205, 192, 180)
 FONT_COLOR = (110, 110, 101)
 
-WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Py2048")
 
 FONT = pygame.font.SysFont("Helvetica", 60, bold=True)
 MOVE_VEL = 20 #Velocity the squares will move with -> 20 pixels per second
+
+WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Py2048")
+
+
