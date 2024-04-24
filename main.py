@@ -72,8 +72,8 @@ class Tile:
             self.col = math.floor(self.x / RECT_WIDTH)
 
     def move(self, delta):
-        self.x == delta[0]
-        self.y == delta[1]
+        self.x += delta[0]
+        self.y += delta[1]
 
 
 def draw_grid(window):
@@ -127,11 +127,43 @@ def move_tiles(window, tiles, clock, direction):
         ceil = True 
 
     elif direction == "right":
-        pass
+        sort_func = lambda x: x.col
+        reverse = True
+        delta = (MOVE_VEL, 0)
+        boundary_check = lambda tile: tile.col == COLS - 1
+        get_next_tile = lambda tile: tiles.get(f"{tile.row}{tile.col + 1}")
+        merge_check = lambda tile, next_tile: tile.x < next_tile.x - MOVE_VEL
+        move_check = (
+            lambda tile, next_tile: tile.x + RECT_WIDTH + MOVE_VEL < next_tile.x
+        )
+        ceil = False
+
     elif direction == "up":
-        pass
+        sort_func = lambda x: x.row
+        reverse = False
+        delta = (0, -MOVE_VEL)
+        boundary_check = lambda tile: tile.row == 0
+        get_next_tile = lambda tile: tiles.get(f"{tile.row - 1}{tile.col}")
+        merge_check = lambda tile, next_tile: tile.y > next_tile.y + MOVE_VEL
+        move_check = (
+            lambda tile, next_tile: tile.y > next_tile.y + RECT_HEIGHT + MOVE_VEL
+        )
+        
+        
     elif direction == "down":
-        pass
+        ceil = True 
+        sort_func = lambda x: x.row
+        reverse = True
+        delta = (0, MOVE_VEL)
+        boundary_check = lambda tile: tile.row == ROWS - 1
+        get_next_tile = lambda tile: tiles.get(f"{tile.row + 1}{tile.col}")
+        merge_check = lambda tile, next_tile: tile.y < next_tile.y - MOVE_VEL
+        move_check = (
+            lambda tile, next_tile: tile.y + RECT_HEIGHT + MOVE_VEL < next_tile.y 
+        )
+        ceil = False
+        
+        
 
     while updated:
         clock.tick(FPS)
@@ -204,7 +236,13 @@ def main(window): #defines the game loop and event for quitting
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     move_tiles(window, tiles, clock, "left")
-                    
+                if event.key == pygame.K_RIGHT:
+                    move_tiles(window, tiles, clock, "right")
+                if event.key == pygame.K_UP:
+                    move_tiles(window, tiles, clock, "up")
+                if event.key == pygame.K_DOWN:
+                    move_tiles(window, tiles, clock, "down")
+
 
         draw(window, tiles)
 
