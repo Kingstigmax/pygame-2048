@@ -148,7 +148,7 @@ def move_tiles(window, tiles, clock, direction):
         move_check = (
             lambda tile, next_tile: tile.y > next_tile.y + RECT_HEIGHT + MOVE_VEL
         )
-        
+        ceil = True
         
     elif direction == "down":
         ceil = True 
@@ -162,7 +162,6 @@ def move_tiles(window, tiles, clock, direction):
             lambda tile, next_tile: tile.y + RECT_HEIGHT + MOVE_VEL < next_tile.y 
         )
         ceil = False
-        
         
 
     while updated:
