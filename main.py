@@ -17,12 +17,26 @@ OUTLINE_THICKNESS = 10
 BACKGROUND_COLOR = (205, 192, 180)
 FONT_COLOR = (110, 110, 101)
 
-
-FONT = pygame.font.SysFont("Helvetica", 60, bold=True)
+FONT = pygame.font.SysFont("comicsans", 60, bold=True)
 MOVE_VEL = 20 #Velocity the squares will move with -> 20 pixels per second
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Py2048")
 
-#this is a test for the warp test
 
+def main(window): #defines the game loop and event for quitting
+    clock = pygame.time.Clock()
+    run = True
+
+    while run:
+        clock.tick(FPS)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                break
+    pygame.quit()
+
+
+if __name__ == "__main__": 
+    main(WINDOW)

@@ -1,0 +1,3 @@
+
+#Ignore the -env setting for this project
+.env
